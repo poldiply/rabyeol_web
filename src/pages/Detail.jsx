@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { portfolioData } from "../data/portfolioData";
 import { useEffect } from "react";
+import Seo from "../components/Seo";
 
 export default function Detail() {
   const { id } = useParams();
@@ -13,13 +14,33 @@ export default function Detail() {
     window.scrollTo(0, 0);
   }, []);
 
-  if (!project) return <div className="p-20 text-center">프로젝트를 찾을 수 없습니다.</div>;
+  if (!project) {
+    return (
+      <>
+        <Seo
+          title="포트폴리오를 찾을 수 없습니다"
+          description="요청하신 포트폴리오를 찾을 수 없습니다."
+          path={`/portfolio/${id}`}
+          robots="noindex,follow"
+        />
+        <div className="p-20 text-center">프로젝트를 찾을 수 없습니다.</div>
+      </>
+    );
+  }
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-20">
+    <>
+      <Seo
+        title={`${project.title} 포트폴리오`}
+        description={project.subTitle}
+        path={`/portfolio/${project.id}`}
+        ogType="article"
+        image={project.mainImg}
+      />
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-20">
       {/* 상단 Hero 섹션 */}
       <div className="h-[50vh] md:h-[70vh] relative overflow-hidden">
-        <img src={project.mainImg} className="w-full h-full object-cover" />
+        <img src={project.mainImg} alt={project.title} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-10 md:p-20 text-white">
           <motion.h1 initial={{ y: 30 }} animate={{ y: 0 }} className="text-4xl md:text-6xl font-bold mb-4">
             {project.title}
@@ -65,6 +86,7 @@ export default function Detail() {
           LIST
         </button>
       </div>
-    </motion.div>
+      </motion.div>
+    </>
   );
 }

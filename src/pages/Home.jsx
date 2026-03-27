@@ -1,15 +1,31 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { portfolioData } from "../data/portfolioData";
 import Footer from "../components/Footer";
 import ScrollIndicator from "../components/ScrollIndicator";
 import PremiumButton from "../components/PremiumButton";
 import { useNavigate } from "react-router-dom";
+import Seo from "../components/Seo";
+import { SITE_URL } from "../constants/seo";
 
 export default function Home() {
-    const navigate = useNavigate();
-    const [activeSection, setActiveSection] = useState("hero");
+  const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState("hero");
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "EventPlanner",
+    name: "라별커뮤니케이션즈",
+    url: SITE_URL,
+    image: `${SITE_URL}/images/logo3.png`,
+    telephone: "032-262-2164",
+    email: "rastarcomms@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "KR",
+      addressRegion: "인천광역시",
+      streetAddress: "서구 중봉대로 490, 893호",
+    },
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -28,7 +44,14 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth relative">
+    <>
+      <Seo
+        title="방송 무대 연출·공공행사·축제 전문"
+        description="Netflix, Disney+ 방송 무대 연출부터 공공행사, 대학교 축제, 기업 워크숍까지 기획·운영하는 라별커뮤니케이션즈입니다."
+        path="/"
+        structuredData={organizationSchema}
+      />
+      <main className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth relative">
         <ScrollIndicator activeSection={activeSection} />
       {/* 1. HERO: logo2 사용 */}
       {/* <section id="hero" className="h-screen w-full snap-start flex flex-col justify-center items-center bg-white overflow-hidden relative">
@@ -112,7 +135,7 @@ export default function Home() {
             <p className="text-gray-600 leading-relaxed">우리는 사람과 사람, 마음과 마음을 잇는<br/>감동을 설계합니다.</p>
           </div>
           <div className="hidden md:block bg-slate-200 h-96 rounded-2xl overflow-hidden">
-             <img src="/images/about_img.png" className="w-full h-full object-cover grayscale" />
+             <img src="/images/about_img.png" alt="라별커뮤니케이션즈 소개 이미지" className="w-full h-full object-cover grayscale" />
           </div>
         </div>
       </section>
@@ -155,6 +178,7 @@ export default function Home() {
         <Footer />
     </section>
       
-    </main>
+      </main>
+    </>
   );
 }

@@ -1,8 +1,24 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Seo from "../components/Seo";
+import { SITE_URL } from "../constants/seo";
 
 export default function Contact() {
-    const [result, setResult] = useState("");
+  const [result, setResult] = useState("");
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "라별커뮤니케이션즈",
+    url: `${SITE_URL}/contact`,
+    telephone: "032-262-2164",
+    email: "rastarcomms@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "KR",
+      addressRegion: "인천광역시",
+      streetAddress: "서구 중봉대로 490, 893호",
+    },
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -28,7 +44,14 @@ export default function Contact() {
     }
   };
   return (
-    <motion.div 
+    <>
+      <Seo
+        title="문의하기"
+        description="라별커뮤니케이션즈 문의 페이지입니다. 공공행사, 방송 무대 연출, 대학교 축제, 기업 워크숍 상담을 빠르게 남겨보세요."
+        path="/contact"
+        structuredData={localBusinessSchema}
+      />
+      <motion.div 
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
       className="pt-32 pb-20 px-6 md:px-20 max-w-7xl mx-auto"
@@ -83,6 +106,7 @@ export default function Contact() {
           </form>
         </div>
       </div>
-    </motion.div>
+      </motion.div>
+    </>
   );
 }
