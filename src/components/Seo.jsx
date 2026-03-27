@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 import { DEFAULT_OG_IMAGE, SITE_NAME, buildAbsoluteUrl } from "../constants/seo";
 
 export default function Seo({
@@ -15,7 +15,7 @@ export default function Seo({
   const ogImageUrl = buildAbsoluteUrl(image);
 
   return (
-    <Helmet>
+    <Head>
       <html lang="ko" />
       <title>{pageTitle}</title>
       <meta name="description" content={description} />
@@ -38,6 +38,6 @@ export default function Seo({
       {structuredData ? (
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
       ) : null}
-    </Helmet>
+    </Head>
   );
 }
