@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home() {
     const navigate = useNavigate();
-    const [activeSection, setActiveSection] = useState("hero");
+    const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,7 +65,7 @@ export default function Home() {
             </div>
         </motion.div>
     </section> */}
-    <section id="hero" className="h-screen w-full snap-start relative flex flex-col justify-center items-center overflow-hidden">
+    <section id="home" className="h-screen w-full snap-start relative flex flex-col justify-center items-center overflow-hidden">
   {/* 전체 배경 비디오 */}
   <div className="absolute inset-0 z-0">
     <video

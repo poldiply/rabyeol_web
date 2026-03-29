@@ -45,18 +45,17 @@ export default function Footer() {
           {/* 문의하기 버튼 추가 */}
           <Link 
             to="/contact"
-            // className="btn btn-outline border-brandRed text-brandRed hover:bg-brandRed hover:border-brandRed rounded-full px-10 mt-4 mb-8"
             className="btn btn-outline border-white text-white rounded-full px-12 hover:bg-brandRed hover:border-brandRed"
           >
             CONTACT US
           </Link>          
           <a 
-              href="/docs/회사소개서.pdf" // 실제 파일명으로 수정해줘!
-              download="라별커뮤니케이션즈_회사소개서.pdf" // 다운로드될 때 저장될 이름
-              className="btn btn-outline border-white/30 text-white hover:bg-white hover:text-black rounded-full px-10"
-            >
-              DOWNLOAD PDF
-            </a>
+            href="/docs/rabyeol_profile.pdf"
+            download="라별커뮤니케이션즈_회사소개서.pdf"
+            className="btn btn-outline border-white/30 text-white hover:bg-white hover:text-black rounded-full px-10"
+          >
+            DOWNLOAD PDF
+          </a>
         </motion.div>
       </div>
 

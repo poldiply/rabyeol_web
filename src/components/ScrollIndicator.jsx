@@ -1,4 +1,4 @@
-const sections = ["hero", "about", "public-events", "broadcast-stage", "univ-festival", "workshop-mt", "contact"];
+const sections = ["home", "about", "public-events", "broadcast-stage", "univ-festival", "workshop-mt", "contact"];
 
 export default function ScrollIndicator({ activeSection }) {
   return (
