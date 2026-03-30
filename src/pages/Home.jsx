@@ -34,12 +34,12 @@ export default function Home() {
         <meta name="description" content="공연, 축제, 미디어 콘텐츠, 기업 워크숍 전문 기획 그룹 라별커뮤니케이션즈입니다." />
         <meta name="keywords" content="라별커뮤니케이션즈, 기업/기관 행사, 대학 행사, 행사 전문 대행사, 여행/관광, 섭외 대행, 축제기획, 공연기획, 워크숍전문" />
         <link rel="canonical" href="https://www.rastarcomms.com/" />
-        
+
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.rastarcomms.com/" />
-        <meta property="og:title" content="라별커뮤니케이션즈 | Rabyeol Communications" />
-        <meta property="og:description" content="한 편의 완벽한 이야기를 만들어가는 기획사, 라별커뮤니케이션즈의 포트폴리오를 확인하세요." />
+        <meta property="og:title" content="라별커뮤니케이션즈 | Rabyeol Comms" />
+        <meta property="og:description" content="방송 무대 연출부터 대규모 축제까지, 감동을 설계하는 기획사 라별입니다." />
         <meta property="og:image" content="https://www.rastarcomms.com/images/logo3.png" />
 
         {/* Twitter */}
@@ -49,7 +49,7 @@ export default function Home() {
       </Head>
 
       <ScrollIndicator activeSection={activeSection} />
-      
+
       {/* 1. HERO 섹션 */}
       <section id="home" className="h-screen w-full snap-start relative flex flex-col justify-center items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
