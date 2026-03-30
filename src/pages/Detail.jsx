@@ -47,39 +47,54 @@ export default function Detail() {
       </Head>
 
       {/* 1. HERO 섹션 */}
-      <div className="h-[40vh] md:h-[60vh] relative overflow-hidden">
+      <div className="h-[50vh] md:h-[70vh] relative overflow-hidden">
         <img src={category.mainImg} className="w-full h-full object-cover" alt={category.title} />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-10 md:p-20 text-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-10 md:p-24 text-white">
           <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8 }}>
-            <span className="text-brandRed font-bold tracking-[0.3em] mb-4 block text-sm md:text-base">OUR PORTFOLIO</span>
-            <h1 className="text-4xl md:text-7xl font-bold mb-6 uppercase leading-tight">{category.title}</h1>
+            <span className="text-brandRed font-bold tracking-[0.4em] mb-4 block text-xs md:text-sm uppercase">Our Expertise</span>
+            <h1 className="text-4xl md:text-7xl font-bold mb-6 uppercase leading-tight tracking-tighter">
+              {category.title}
+            </h1>
+            {category.subTitle && (
+              <p className="text-lg md:text-2xl font-light text-white/80 max-w-3xl leading-relaxed italic border-l-2 border-brandRed pl-6">
+                "{category.subTitle}"
+              </p>
+            )}
           </motion.div>
         </div>
       </div>
 
-      {/* 2. OVERVIEW & CONTENTS */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
-        <div className="grid lg:grid-cols-3 gap-16 items-start">
-          <div className="lg:col-span-2">
-            <h3 className="text-3xl font-bold mb-8 text-gray-900 flex items-center gap-4">
-              Overview
-              <span className="h-px flex-1 bg-gray-100 italic font-light text-sm text-gray-400">Total Solutions</span>
-            </h3>
-            <p className="text-xl text-gray-600 leading-relaxed font-light mb-12 whitespace-pre-wrap">{category.overview}</p>
-          </div>
-          <div className="bg-gray-50 p-10 rounded-3xl border border-gray-100">
-            <h4 className="text-brandRed font-bold uppercase tracking-tighter mb-8 text-sm">Service Scope</h4>
-            <ul className="space-y-6">
-              {category.contents.map((item, i) => (
-                <li key={i} className="text-gray-800 font-medium flex items-center group transition-all">
-                  <span className="w-8 h-8 rounded-full bg-brandRed/10 text-brandRed flex items-center justify-center mr-4 group-hover:bg-brandRed group-hover:text-white transition-colors">
-                    {i + 1}
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* 2. OVERVIEW & SERVICE SCOPE (Horizontal Layout) */}
+      <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+        <div className="mb-24">
+          <h3 className="text-brandRed font-bold uppercase tracking-[0.3em] mb-10 text-xs">Overview</h3>
+          <p className="text-2xl md:text-4xl font-light text-gray-800 leading-tight whitespace-pre-wrap italic max-w-4xl">
+            {category.overview}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-12">
+          {category.contents.map((item, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="group"
+            >
+              <div className="flex gap-6 items-start">
+                <span className="text-4xl md:text-5xl font-black text-gray-100 group-hover:text-brandRed/20 transition-colors duration-500 leading-none">
+                  0{i + 1}
+                </span>
+                <div className="pt-2 flex-1">
+                  <h4 className="text-lg md:text-xl font-bold text-gray-900 mb-4 tracking-tight group-hover:text-brandRed transition-colors">
+                    {item}
+                  </h4>
+                  <div className="h-[2px] w-8 bg-gray-200 group-hover:w-24 group-hover:bg-brandRed transition-all duration-700"></div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
 
@@ -142,26 +157,51 @@ export default function Detail() {
       <AnimatePresence>
         {selectedProject && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 shrink-0">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedProject(null)} className="absolute inset-0 bg-black/95 backdrop-blur-md" />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedProject(null)} className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
             <motion.div
               initial={{ opacity: 0, y: 50, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
-              className="relative bg-white w-full max-w-5xl max-h-[90vh] rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col"
+              className="relative bg-white w-full max-w-5xl max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col"
             >
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 z-[110] w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-brandRed transition-colors shadow-lg"
+                className="absolute top-6 right-6 z-[110] w-10 h-10 bg-white/80 backdrop-blur-md text-gray-900 rounded-full flex items-center justify-center hover:bg-brandRed hover:text-white transition-all shadow-md border border-gray-100"
               >
                 ✕
               </button>
 
-              <div className="p-8 md:p-12 pb-6 md:pb-8 border-b border-gray-50 flex-shrink-0">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                  <div className="max-w-2xl">
-                    <span className="text-brandRed font-bold text-sm tracking-widest uppercase mb-2 block">{selectedProject.client}</span>
-                    <h2 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight mb-4">{selectedProject.title}</h2>
-                    <p className="text-gray-500 font-light leading-relaxed text-sm md:text-base">{selectedProject.description}</p>
+              <div className="p-8 md:p-12 pb-6 md:pb-10 border-b border-gray-50 flex-shrink-0">
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-16">
+                  <div className="flex-1">
+                    <h2 className="text-2xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                      {selectedProject.title}
+                    </h2>
+                    <p className="text-gray-500 font-light leading-relaxed text-sm md:text-lg max-w-2xl whitespace-pre-wrap">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+                  
+                  {/* 프로젝트 메타 정보 (Client, Location) */}
+                  <div className="flex flex-col gap-6 shrink-0 md:min-w-[200px] md:border-l md:pl-10 border-gray-100">
+                    {selectedProject.client && (
+                      <div>
+                        <span className="text-brandRed text-[10px] font-bold uppercase tracking-[0.2em] block mb-2 opacity-70">Client</span>
+                        <p className="text-gray-900 text-sm md:text-base font-bold">{selectedProject.client}</p>
+                      </div>
+                    )}
+                    {selectedProject.location && (
+                      <div>
+                        <span className="text-brandRed text-[10px] font-bold uppercase tracking-[0.2em] block mb-2 opacity-70">Location</span>
+                        <div className="flex items-center gap-2">
+                          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <p className="text-gray-900 text-sm md:text-base font-bold">{selectedProject.location}</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
