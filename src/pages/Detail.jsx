@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { Head } from "vite-react-ssg";
 import { portfolioData } from "../data/portfolioData";
 import { useEffect, useState } from "react";
 import SimpleFooter from "../components/SimpleFooter";
@@ -24,18 +25,27 @@ export default function Detail() {
 
   const handleNext = (e) => {
     e.stopPropagation();
-    const images = selectedProject.images || [selectedProject.thumbnail];
+    const images = selectedProject.images && selectedProject.images.length > 0 ? selectedProject.images : [selectedProject.thumbnail];
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
   const handlePrev = (e) => {
     e.stopPropagation();
-    const images = selectedProject.images || [selectedProject.thumbnail];
+    const images = selectedProject.images && selectedProject.images.length > 0 ? selectedProject.images : [selectedProject.thumbnail];
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-white font-sans">
+      <Head>
+        <title>{category.title} | 라별커뮤니케이션즈</title>
+        <meta name="description" content={`${category.title} 분야의 주요 실적과 프로젝트를 소개합니다.`} />
+        <meta name="keywords" content={`${category.title}, 포트폴리오, 행사실적, 라별커뮤니케이션즈`} />
+        <link rel="canonical" href={`https://www.rastarcomms.com/portfolio/${id}`} />
+        <meta property="og:title" content={`${category.title} | 라별커뮤니케이션즈`} />
+        <meta property="og:image" content="https://www.rastarcomms.com/images/logo3.png" />
+      </Head>
+
       {/* 1. HERO 섹션 */}
       <div className="h-[40vh] md:h-[60vh] relative overflow-hidden">
         <img src={category.mainImg} className="w-full h-full object-cover" alt={category.title} />
@@ -128,7 +138,7 @@ export default function Detail() {
         </button>
       </div>
 
-      {/* 5. PROJECT 상세 모달 (상부 정보, 하부 슬라이더 구조) */}
+      {/* 5. PROJECT 상세 모달 */}
       <AnimatePresence>
         {selectedProject && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 shrink-0">
@@ -139,18 +149,13 @@ export default function Detail() {
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
               className="relative bg-white w-full max-w-5xl max-h-[90vh] rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col"
             >
-              {/* 닫기 버튼: 항상 표시 및 고대비 스타일 */}
               <button
                 onClick={() => setSelectedProject(null)}
                 className="absolute top-6 right-6 z-[110] w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-brandRed transition-colors shadow-lg"
-                aria-label="Close"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                ✕
               </button>
 
-              {/* [상단 영역] 프로젝트 정보 (컴팩트 배치) */}
               <div className="p-8 md:p-12 pb-6 md:pb-8 border-b border-gray-50 flex-shrink-0">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                   <div className="max-w-2xl">
@@ -158,16 +163,9 @@ export default function Detail() {
                     <h2 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight mb-4">{selectedProject.title}</h2>
                     <p className="text-gray-500 font-light leading-relaxed text-sm md:text-base">{selectedProject.description}</p>
                   </div>
-                  <div className="flex gap-8 shrink-0 py-2 border-l-0 md:border-l md:pl-8 border-gray-100">
-                    <div>
-                      <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Category</span>
-                      <p className="text-gray-900 text-xs font-semibold">{category.category}</p>
-                    </div>
-                  </div>
                 </div>
               </div>
 
-              {/* [하단 영역] 이미지 슬라이더 */}
               <div className="flex-1 bg-gray-50 p-4 md:p-8 flex flex-col justify-center overflow-hidden">
                 <div className="relative w-full max-w-4xl mx-auto aspect-video rounded-2xl overflow-hidden group shadow-xl">
                   <AnimatePresence mode="wait">
@@ -179,33 +177,14 @@ export default function Detail() {
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.5 }}
                       className="w-full h-full object-cover"
-                      alt={`${selectedProject.title} ${currentImageIndex + 1}`}
                     />
                   </AnimatePresence>
 
-                  {/* 좌우 네비게이션 화살표 (심플) */}
                   {(selectedProject.images && selectedProject.images.length > 1) && (
                     <>
-                      <button onClick={handlePrev} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/20 hover:bg-black/50 text-white rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
-                      </button>
-                      <button onClick={handleNext} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/20 hover:bg-black/50 text-white rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
-                      </button>
+                      <button onClick={handlePrev} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/20 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">←</button>
+                      <button onClick={handleNext} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/20 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">→</button>
                     </>
-                  )}
-
-                  {/* 하단 점 네비게이션 */}
-                  {(selectedProject.images && selectedProject.images.length > 1) && (
-                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-                      {selectedProject.images.map((_, idx) => (
-                        <button
-                          key={idx}
-                          onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(idx); }}
-                          className={`w-2 h-2 rounded-full transition-all ${idx === currentImageIndex ? "bg-white w-6" : "bg-white/40 hover:bg-white/60"}`}
-                        />
-                      ))}
-                    </div>
                   )}
                 </div>
               </div>
@@ -214,7 +193,6 @@ export default function Detail() {
         )}
       </AnimatePresence>
 
-      {/* 공통 하단 푸터 (정보 영역 전용) */}
       <SimpleFooter />
     </motion.div>
   );

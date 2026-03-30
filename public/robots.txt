@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://rabyeol-web.pages.dev/sitemap.xml
+
+Sitemap: https://www.rastarcomms.com/sitemap.xml

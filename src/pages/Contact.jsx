@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Head } from "vite-react-ssg";
 import PrivacyModal from "../components/PrivacyModal";
 
 export default function Contact() {
@@ -9,7 +10,7 @@ export default function Contact() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    
+
     if (!agreed) {
       setResult("개인정보 처리방침에 동의해주세요.");
       return;
@@ -39,11 +40,21 @@ export default function Contact() {
   };
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className="pt-32 pb-20 px-6 md:px-20 max-w-7xl mx-auto"
     >
+      <Head>
+        <title>비즈니스 문의 | 라별커뮤니케이션즈</title>
+        <meta name="description" content="공연, 축제, 마케팅 기획 및 기업 캠프/워크숍 문의를 남겨주세요." />
+        <meta name="keywords" content="문의하기, 기업 행사 문의, 대학 행사 기획, 섭외 대행, 기업 캠프, 워크숍 문의" />
+        <link rel="canonical" href="https://www.rastarcomms.com/contact" />
+        <meta property="og:title" content="비즈니스 문의 | 라별커뮤니케이션즈" />
+        <meta property="og:url" content="https://www.rastarcomms.com/contact" />
+        <meta property="og:image" content="https://www.rastarcomms.com/images/logo3.png" />
+      </Head>
+
       <div className="mb-16">
         <h2 className="text-brandRed font-bold tracking-widest mb-4 uppercase">Contact</h2>
         <h1 className="text-4xl md:text-6xl font-bold text-gray-900 font-sans">오시는 길 & 문의하기</h1>
@@ -52,36 +63,36 @@ export default function Contact() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
         {/* 왼쪽: 지도 및 주소 정보 */}
         <div>
-          <div className="bg-gray-200 w-full h-96 rounded-2xl overflow-hidden mb-8 shadow-inner border border-gray-100">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.63660634628!2d126.6666!3d37.5252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9bf1!2z7J247LKc6rSR7Jet7IucIOyEnOq1rCDsoJH didn66y064yA66GcIDQ5MA!!5e0!3m2!1sko!2skr!4v1710000000000!5m2!1sko!2skr" 
-              className="w-full h-full border-0" 
-              allowFullScreen="" 
-              loading="lazy"
-            ></iframe>
-          </div>
+            <div className="bg-gray-200 w-full h-96 rounded-2xl overflow-hidden mb-8 shadow-inner border border-gray-100">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2228.4158494156736!2d126.6484010399026!3d37.52386565788316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b7f0228bf28dd%3A0xff6e6e61c875ef63!2z7J247LKc6rSR7Jet7IucIOyEnOq1rCDssq3rnbzrj5kgMjAyLTM!5e0!3m2!1sko!2skr!4v1774880656522!5m2!1sko!2skr"
+                className="w-full h-full border-0"
+                allowFullScreen=""
+                loading="lazy"
+              ></iframe>
+            </div>
           <div className="space-y-6">
-             <div className="flex flex-col">
-                <span className="text-brandRed font-bold text-xs uppercase tracking-widest mb-2">Address</span>
-                <p className="text-xl font-bold text-gray-900">인천광역시 서구 중봉대로 490, 893호</p>
-             </div>
-             <div className="flex gap-12">
-                <div className="flex flex-col">
-                    <span className="text-brandRed font-bold text-xs uppercase tracking-widest mb-2">Call</span>
-                    <p className="text-gray-600 font-medium">032-262-2164</p>
-                </div>
-                <div className="flex flex-col">
-                    <span className="text-brandRed font-bold text-xs uppercase tracking-widest mb-2">Email</span>
-                    <p className="text-gray-600 font-medium">rastarcomms@gmail.com</p>
-                </div>
-             </div>
+            <div className="flex flex-col">
+              <span className="text-brandRed font-bold text-xs uppercase tracking-widest mb-2">Address</span>
+              <p className="text-xl font-bold text-gray-900">인천광역시 서구 중봉대로 490, 893호</p>
+            </div>
+            <div className="flex gap-12">
+              <div className="flex flex-col">
+                <span className="text-brandRed font-bold text-xs uppercase tracking-widest mb-2">Call</span>
+                <p className="text-gray-600 font-medium">032-262-2164</p>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-brandRed font-bold text-xs uppercase tracking-widest mb-2">Email</span>
+                <p className="text-gray-600 font-medium">rastarcomms@gmail.com</p>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* 오른쪽: 문의하기 폼 */}
         <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl shadow-gray-200/50 border border-gray-50 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brandRed/5 rounded-bl-full -mr-10 -mt-10"></div>
-          
+
           <form onSubmit={onSubmit} className="space-y-8 relative z-10">
             <div className="group">
               <label className="block text-xs font-bold uppercase tracking-widest mb-3 text-gray-400 group-focus-within:text-brandRed transition-colors">성함 / 회사명</label>
@@ -99,7 +110,7 @@ export default function Contact() {
               <label className="block text-xs font-bold uppercase tracking-widest mb-3 text-gray-400 group-focus-within:text-brandRed transition-colors">문의내용</label>
               <textarea name="message" required rows="4" className="w-full bg-gray-50/50 border-b-2 border-gray-100 py-4 px-0 focus:border-brandRed outline-none transition-all resize-none placeholder:text-gray-300 font-medium" placeholder="문의하실 내용을 입력해주세요."></textarea>
             </div>
-            
+
             {/* 개인정보 동의 섹션 */}
             <div className="flex items-start gap-3 py-4 border-t border-gray-50">
               <div className="flex items-center h-5">
@@ -128,7 +139,7 @@ export default function Contact() {
             <button type="submit" className="w-full bg-brandRed text-white font-bold py-5 rounded-2xl hover:bg-black shadow-xl shadow-brandRed/20 hover:shadow-none transition-all duration-300 transform hover:-translate-y-1 uppercase tracking-[0.2em]">
               문의하기
             </button>
-            
+
             {result && <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center mt-6 font-bold text-brandRed">{result}</motion.p>}
           </form>
         </div>
@@ -137,9 +148,9 @@ export default function Contact() {
       {/* 개인정보 처리방침 컴포넌트 호출 */}
       <AnimatePresence>
         {showPrivacy && (
-          <PrivacyModal 
-            isOpen={showPrivacy} 
-            onClose={() => setShowPrivacy(false)} 
+          <PrivacyModal
+            isOpen={showPrivacy}
+            onClose={() => setShowPrivacy(false)}
           />
         )}
       </AnimatePresence>
