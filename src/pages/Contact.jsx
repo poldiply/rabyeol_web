@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import PrivacyModal from "../components/PrivacyModal";
 
 export default function Contact() {
   const [result, setResult] = useState("");
@@ -87,6 +88,10 @@ export default function Contact() {
               <input name="name" type="text" required className="w-full bg-gray-50/50 border-b-2 border-gray-100 py-4 px-0 focus:border-brandRed outline-none transition-all placeholder:text-gray-300 font-medium" placeholder="홍길동 / (주)라별" />
             </div>
             <div className="group">
+              <label className="block text-xs font-bold uppercase tracking-widest mb-3 text-gray-400 group-focus-within:text-brandRed transition-colors">이메일 주소</label>
+              <input name="email" type="email" required className="w-full bg-gray-50/50 border-b-2 border-gray-100 py-4 px-0 focus:border-brandRed outline-none transition-all placeholder:text-gray-300 font-medium" placeholder="example@email.com" />
+            </div>
+            <div className="group">
               <label className="block text-xs font-bold uppercase tracking-widest mb-3 text-gray-400 group-focus-within:text-brandRed transition-colors">연락처</label>
               <input name="phone" type="tel" required className="w-full bg-gray-50/50 border-b-2 border-gray-100 py-4 px-0 focus:border-brandRed outline-none transition-all placeholder:text-gray-300 font-medium" placeholder="010-0000-0000" />
             </div>
@@ -129,41 +134,13 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* 개인정보 처리방침 모달 */}
+      {/* 개인정보 처리방침 컴포넌트 호출 */}
       <AnimatePresence>
         {showPrivacy && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              exit={{ opacity: 0 }}
-              onClick={() => setShowPrivacy(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            />
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }} 
-              animate={{ scale: 1, opacity: 1 }} 
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative bg-white w-full max-w-lg rounded-[2rem] p-10 overflow-hidden shadow-2xl"
-            >
-              <h4 className="text-2xl font-bold mb-6 text-gray-900">개인정보 수집 및 이용 안내</h4>
-              <div className="text-gray-600 text-sm leading-relaxed space-y-4 max-h-[40vh] overflow-y-auto pr-4 custom-scrollbar">
-                <p>라별(Rabyeol)은 고객님의 문의사항 처리를 위해 다음과 같이 개인정보를 수집 및 이용합니다.</p>
-                <div className="bg-gray-50 p-4 rounded-xl space-y-2">
-                    <p><strong>1. 수집항목:</strong> 성함/회사명, 연락처, 이메일, 문의내용</p>
-                    <p><strong>2. 수집목적:</strong> 문의사항에 대한 상담 및 답변 제공</p>
-                    <p><strong>3. 보유기간:</strong> <span className="text-brandRed font-bold underline">상담 완료 후 즉시 파기</span> (단, 관계법령에 의해 보존할 필요가 있는 경우 관련 법령에 따름)</p>
-                </div>
-                <p>고객님은 서비스 제공에 필요한 최소한의 개인정보 수집 및 이용 동의를 거부하실 수 있으나, 이 경우 문의하기 서비스 이용이 제한될 수 있습니다.</p>
-              </div>
-              <button 
-                onClick={() => setShowPrivacy(false)}
-                className="w-full mt-8 bg-black text-white py-4 rounded-xl font-bold hover:bg-brandRed transition-colors"
-              >
-                확인했습니다
-              </button>
-            </motion.div>
-          </div>
+          <PrivacyModal 
+            isOpen={showPrivacy} 
+            onClose={() => setShowPrivacy(false)} 
+          />
         )}
       </AnimatePresence>
     </motion.div>
