@@ -14,7 +14,7 @@ export default function SimpleFooter() {
           
           {/* 왼쪽: 회사 기본 정보 */}
           <div className="text-white">
-            <h3 className="font-black text-2xl uppercase tracking-tighter mb-6">
+            <h3 className="font-bold text-2xl uppercase tracking-tighter mb-6">
               Rabyeol Communications
             </h3>
             <div className="space-y-1 text-sm md:text-base font-medium opacity-90">
@@ -45,7 +45,7 @@ export default function SimpleFooter() {
               download="라별커뮤니케이션즈_회사소개서.pdf"
               className="w-full md:w-72 bg-black/20 text-white border border-white/30 hover:bg-white hover:text-brandRed px-8 py-4 rounded-full font-bold text-sm tracking-widest transition-all backdrop-blur-sm flex items-center justify-between group"
             >
-              <span>DOWNLOAD PDF</span>
+              <span>COMPANY PROFILE</span>
               <svg className="w-5 h-5 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>

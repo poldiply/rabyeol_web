@@ -42,20 +42,27 @@ export default function Footer() {
             한 편의 완벽한 이야기,<br />
             <span className="text-brandRed">라별</span>이 함께합니다.
           </h2>
-          {/* 문의하기 버튼 추가 */}
-          <Link 
-            to="/contact"
-            className="btn btn-outline border-white text-white rounded-full px-12 hover:bg-brandRed hover:border-brandRed"
-          >
-            CONTACT US
-          </Link>          
-          <a 
-            href="/docs/rabyeol_profile.pdf"
-            download="라별커뮤니케이션즈_회사소개서.pdf"
-            className="btn btn-outline border-white/30 text-white hover:bg-white hover:text-black rounded-full px-10"
-          >
-            DOWNLOAD PDF
-          </a>
+          <div className="flex flex-col md:flex-row gap-4 items-start">
+            <Link 
+              to="/contact"
+              className="btn btn-outline border-white text-white rounded-full px-12 hover:bg-brandRed hover:border-brandRed flex items-center gap-3 group"
+            >
+              <span>CONTACT US</span>
+              <svg className="w-5 h-5 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>          
+            <a 
+              href="/docs/rabyeol_profile.pdf"
+              download="라별커뮤니케이션즈_회사소개서.pdf"
+              className="btn btn-outline border-white/30 text-white hover:bg-white hover:text-black rounded-full px-10 flex items-center gap-3 group"
+            >
+              <span>COMPANY PROFILE</span>
+              <svg className="w-5 h-5 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </a>
+          </div>
         </motion.div>
       </div>
 
@@ -70,7 +77,7 @@ export default function Footer() {
 
         <div className="relative z-10 px-10 md:px-20 py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
           <div>
-            <p className="font-black text-white mb-4 text-xl md:text-2xl uppercase tracking-tighter">
+            <p className="font-bold text-white mb-4 text-xl md:text-2xl uppercase tracking-tighter">
               Rabyeol Communications
             </p>
             <div className="space-y-1 text-sm md:text-base font-medium text-white/90">
