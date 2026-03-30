@@ -8,7 +8,7 @@ export const broadcastStageData = {
   contents: ["특수 구조물 설치", "LED 영상 시스템", "공간 기획 및 연출"],
   years: [
     {
-      year: 2024,
+      // year: 2024,
       projects: [
         {
           id: "broad-2024-1",
